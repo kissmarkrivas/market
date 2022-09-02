@@ -1,0 +1,43 @@
+<h1>Listado de Productos</h1>
+<hr/>
+<input  type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Producto"
+        #txtSearch
+        (keyup)="onSearchPokemon(txtSearch.value)"/>
+
+<button class="btn btn-primary"
+        (click)="prevPage()">
+  Anterior
+</button>
+
+&nbsp;
+
+<button class="btn btn-primary"
+        (click)="nextPage()"
+        [disabled]="(products |filtro:page:search).length === 0"
+        >
+  Siguiente
+</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of products |filtro:page:search,let item=index" >
+      <th scope="row">{{item + page+1}}</th>
+      <!-- <th scope="row">{{prod._id}}</th> -->
+      <td>{{prod.name}}</td>
+      <td>{{prod.category}}</td>
+      <td>{{prod.slug}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
